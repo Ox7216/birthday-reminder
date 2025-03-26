@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- Countdown updated here -->
                     </div>
                     <div class="mt-3">
-                        <button class="btn btn-edit me-2" onclick="editBirthday(${index})">Edit</button>
-                        <button class="btn btn-delete" onclick="deleteBirthday(${index})">Delete</button>
+                        <button class="btn btn-edit me-2" onclick="editBirthday(${index})">Ändern</button>
+                        <button class="btn btn-delete" onclick="deleteBirthday(${index})">Löschen</button>
                     </div>
                 </div>
             `;
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const countdownElement = document.getElementById(`countdown-${index}`);
             if (countdownElement) {
                 countdownElement.innerHTML = `
-                    <div class="time-unit"><span>${daysDiff}</span>D</div>
-                    <div class="time-unit"><span>${hoursDiff}</span>H</div>
+                    <div class="time-unit"><span>${daysDiff}</span>T</div>
+                    <div class="time-unit"><span>${hoursDiff}</span>S</div>
                     <div class="time-unit"><span>${minutesDiff}</span>M</div>
                     <div class="time-unit"><span>${secondsDiff}</span>S</div>
                 `;
