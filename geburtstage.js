@@ -120,8 +120,8 @@ function editBirthday(index) {
         <form class="edit-form">
             <input type="text" class="form-control mb-2" value="${birthday.name}" id="edit-name-${index}">
             <input type="text" class="form-control mb-2" value="${shortDate}" id="edit-date-${index}" maxlength="5" placeholder="ttmm">
-            <button type="button" class="btn btn-save me-2" onclick="saveBirthday(${index})">Save</button>
-            <button type="button" class="btn btn-cancel" onclick="cancelEdit(${index})">Cancel</button>
+            <button type="button" class="btn btn-save me-2" onclick="saveBirthday(${index})">Speichern</button>
+            <button type="button" class="btn btn-cancel" onclick="cancelEdit(${index})">Abbrechen</button>
         </form>
     `;
 
