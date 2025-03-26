@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Reminder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <canvas id="confetti"></canvas>
+    <div class="container mt-5">
+        <h1 class="text-center title mb-4">Birthday Reminder</h1>
+        <div class="card form-card shadow-lg mb-5">
+            <div class="card-body p-4">
+                <form id="birthdayForm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Geburtstag (tt.mm)</label>
+                        <input type="text" class="form-control" id="date" maxlength="5" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Geburtstag hinzufügen</button>
+                </form>
+                <div id="success-message" class="text-center mt-3" style="display: none;"></div>
+                <div id="error-message" class="text-center mt-3" style="display: none;"></div>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="geburtstage.htm" class="btn btn-outline-primary">Alle Geburtstage anzeigen</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const colors = ['#FFB6C1', '#87CEEB', '#DDA0DD', '#00FF00', '#FF00FF'];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.shape = Math.random() > 0.5 ? 'circle' : 'star';
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                if (this.shape === 'circle') {
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                } else {
+                    const points = 5;
+                    const outerRadius = this.size;
+                    const innerRadius = this.size / 2;
+                    for (let i = 0; i < points * 2; i++) {
+                        const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                        const angle = (Math.PI / points) * i;
+                        ctx.lineTo(
+                            this.x + radius * Math.cos(angle),
+                            this.y + radius * Math.sin(angle)
+                        );
+                    }
+                    ctx.closePath();
+                }
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles.length = 0;
+            for (let i = 0; i < 50; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        initParticles();
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        const dateInput = document.getElementById('date');
+        dateInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, '');
+            if (value.length > 4) value = value.slice(0, 4);
+            if (value.length >= 2) {
+                this.value = value.slice(0, 2) + '.' + value.slice(2);
+            } else {
+                this.value = value;
+            }
+        });
+    </script>
+</body>
+</html>
