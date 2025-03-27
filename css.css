@@ -230,6 +230,7 @@ canvas#confetti {
     width: 100%;
 }
 
+/* Glitch Effekt mit leichten Verschiebungen */
 @keyframes glitch {
     0% { transform: translate(0); }
     20% { transform: translate(-2px, 2px); }
@@ -239,17 +240,20 @@ canvas#confetti {
     100% { transform: translate(0); }
 }
 
+/* Pulsierender Schatten mit Farbwechsel */
 @keyframes pulse {
     0% { box-shadow: 0 0 5px #469674; } 
     50% { box-shadow: 0 0 15px #bd4343; } 
     100% { box-shadow: 0 0 5px #469674; }
 }
 
+/* Einblenden von unsichtbar zu sichtbar */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
+/* Responsive Anpassungen für Bildschirme bis 768px */
 @media (max-width: 768px) {
     .title { font-size: 2rem; }
     .countdown .time-unit { width: 40px; height: 25px; font-size: 0.8rem; }
