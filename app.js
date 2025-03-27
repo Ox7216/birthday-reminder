@@ -1,3 +1,4 @@
+    // Hinzufügen eines Geburtstags
 document.getElementById('birthdayForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
@@ -14,13 +15,15 @@ document.getElementById('birthdayForm').addEventListener('submit', function(e) {
         }, 5000);
         return;
     }
+	// Format zu tt.mm
     dateInput = dateInput.slice(0, 2) + '.' + dateInput.slice(2);
 
+    // Parsen
     const [day, month] = dateInput.split('.');
     const parsedDay = parseInt(day, 10);
     const parsedMonth = parseInt(month, 10) - 1;
 
-
+	// Datum UTC
     const tempDate = new Date(Date.UTC(2000, parsedMonth, parsedDay));
     if (isNaN(tempDate.getTime()) || parsedDay < 1 || parsedDay > 31 || parsedMonth < 0 || parsedMonth > 11) {
         const errorMessage = document.getElementById('error-message');
@@ -33,11 +36,13 @@ document.getElementById('birthdayForm').addEventListener('submit', function(e) {
         return;
     }
 
+    // Datum als ISO-String speichern
     const formattedDate = tempDate.toISOString().split('T')[0];
     const birthdays = JSON.parse(localStorage.getItem('birthdays')) || [];
     birthdays.push({ name, date: formattedDate });
     localStorage.setItem('birthdays', JSON.stringify(birthdays));
 
+    // Erfolgsmeldung anzeigen
     const successMessage = document.getElementById('success-message');
     successMessage.textContent = `${name} hinzugefügt!`;
     successMessage.style.display = 'block';
@@ -46,14 +51,17 @@ document.getElementById('birthdayForm').addEventListener('submit', function(e) {
         successMessage.style.display = 'none';
     }, 5000);
 
+	// Formular zurücksetzen
     document.getElementById('birthdayForm').reset();
     checkBirthdays();
 });
 
+	// Prüft ob ein Jahr ein Schaltjahr ist
 function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 }
 
+// Berechnet den nächsten Geburtstag
 function getNextBirthday(birthDate) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -86,6 +94,7 @@ function getNextBirthday(birthDate) {
     return nextBirthday;
 }
 
+// Prüft Geburtstage und zeigt Benachrichtigungen
 function checkBirthdays() {
     const birthdays = JSON.parse(localStorage.getItem('birthdays')) || [];
     const today = new Date();
@@ -107,6 +116,7 @@ function checkBirthdays() {
     });
 }
 
+// Browser Benachrichtigungen
 function notifyUser(message) {
     if (Notification.permission === 'granted') {
         new Notification(message);

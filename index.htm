@@ -36,6 +36,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
     <script>
+		// Konfetti Animation initialisieren
         const canvas = document.getElementById('confetti');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -44,6 +45,7 @@
         const particles = [];
         const colors = ['#FFB6C1', '#87CEEB', '#DDA0DD', '#00FF00', '#FF00FF'];
 
+		// Klasse für einzelne Partikel
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -55,6 +57,7 @@
                 this.shape = Math.random() > 0.5 ? 'circle' : 'star';
             }
 
+			// Position aktualisieren
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
@@ -62,6 +65,7 @@
                 if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
 
+			// Position zeichnen
             draw() {
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
@@ -85,6 +89,7 @@
             }
         }
 
+		// Partikel erstellen
         function initParticles() {
             particles.length = 0;
             for (let i = 0; i < 50; i++) {
@@ -94,6 +99,7 @@
 
         initParticles();
 
+		// Animation starten
         function animate() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -103,14 +109,16 @@
             });
             requestAnimationFrame(animate);
         }
-
         animate();
+		
+		// Fenstergröße anpassen
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initParticles();
         });
 
+		// Datumseingabe automatisch formatieren (tt.mm)
         const dateInput = document.getElementById('date');
         dateInput.addEventListener('input', function() {
             let value = this.value.replace(/[^0-9]/g, '');

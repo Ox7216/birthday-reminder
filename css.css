@@ -1,3 +1,4 @@
+/* Body allgemein */
 body {
     background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
     font-family: 'Poppins', sans-serif;
@@ -6,7 +7,7 @@ body {
     overflow-x: hidden;
     position: relative;
 }
-
+/* Konfetti für Hintergrund */
 canvas#confetti {
     position: fixed;
     top: 0;
@@ -26,7 +27,7 @@ canvas#confetti {
     text-align: center;
     margin-bottom: 2rem;
 }
-
+/* Formular*/
 .form-card {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -62,6 +63,7 @@ canvas#confetti {
     color: #000000;
 }
 
+/* Buttons */
 .btn-primary {
     background: linear-gradient(45deg, #469674, #ff8c00);
     border: none;
@@ -78,6 +80,7 @@ canvas#confetti {
     box-shadow: 0 4px 15px rgba(70, 150, 116, 0.6);
 }
 
+/* Button Umrandung */
 .btn-outline-primary {
     border: 2px solid #ff8c00;
     color: #ff8c00;
@@ -91,6 +94,7 @@ canvas#confetti {
     box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
 }
 
+/* Card für Geburtstage */
 .birthday-card .card {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -129,6 +133,7 @@ canvas#confetti {
     box-shadow: 0 0 10px #ff8c00;
 }
 
+/* Countdown */
 .countdown {
     display: flex;
     gap: 5px;
@@ -156,6 +161,7 @@ canvas#confetti {
     margin-right: 2px;
 }
 
+/* Button Ändern */
 .btn-edit {
     background: #469674;
     border: none;
@@ -165,6 +171,7 @@ canvas#confetti {
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Button Speichern */
 .btn-save {
     background: #60b592;
     border: none;
@@ -174,6 +181,7 @@ canvas#confetti {
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Button Löschen */
 .btn-delete {
     background: #bd4343;
     border: none;
@@ -183,6 +191,7 @@ canvas#confetti {
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Button Abbrechen */
 .btn-cancel {
     background: #d96666;
     border: none;
@@ -246,6 +255,7 @@ canvas#confetti {
     .countdown .time-unit { width: 40px; height: 25px; font-size: 0.8rem; }
 }
 
+/* Erfolgs und Fehlermeldungen */
 #success-message {
     font-size: 1.1rem;
     font-weight: 500;

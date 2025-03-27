@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const birthdayList = document.getElementById('birthdayList');
     const birthdays = JSON.parse(localStorage.getItem('birthdays')) || [];
 
+// Rendert die Geburtstagsliste
     function renderBirthdays() {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCountdowns();
     }
 
+//Aktualisiert die Countdowns
     function updateCountdowns() {
         const today = new Date();
         birthdays.forEach((birthday, index) => {
@@ -63,10 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateCountdowns, 1000);
 });
 
+// Prüft ob ein Schaltjahr vorhanden ist
 function isLeapYear(year) {
     return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 }
 
+// Berechnet den nächsten Geburtstag
 function getNextBirthday(birthDate) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -105,6 +109,7 @@ function getNextBirthday(birthDate) {
     return nextBirthday;
 }
 
+// Bearbeitungsmodus für einen Geburtstag
 function editBirthday(index) {
     const birthdays = JSON.parse(localStorage.getItem('birthdays')) || [];
     const birthday = birthdays[index];
@@ -125,6 +130,7 @@ function editBirthday(index) {
         </form>
     `;
 
+// Datumseingabe formatieren
     const editDateInput = document.getElementById(`edit-date-${index}`);
     editDateInput.addEventListener('input', function() {
         let value = this.value.replace(/[^0-9]/g, '');
@@ -137,6 +143,7 @@ function editBirthday(index) {
     });
 }
 
+// Speichert bearbeitete Geburtstagsdaten
 function saveBirthday(index) {
     const birthdays = JSON.parse(localStorage.getItem('birthdays')) || [];
     const newName = document.getElementById(`edit-name-${index}`).value.trim();
@@ -158,10 +165,12 @@ function saveBirthday(index) {
     location.reload();
 }
 
+// Bearbeitung abbrechen
 function cancelEdit(index) {
     location.reload();
 }
 
+// Geburtstag löschen
 function deleteBirthday(index) {
     const birthdays = JSON.parse(localStorage.getItem('birthdays')) || [];
     birthdays.splice(index, 1);

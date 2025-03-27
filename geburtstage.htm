@@ -17,9 +17,10 @@
             <a href="index.htm" class="btn btn-outline-primary">Geburtstag hinzufügen</a>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS -->
     <script src="geburtstage.js"></script>
     <script>
+		// Konfetti Animation initialisieren
         const canvas = document.getElementById('confetti');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -28,6 +29,7 @@
         const particles = [];
         const colors = ['#FFB6C1', '#87CEEB', '#DDA0DD', '#00FF00', '#FF00FF'];
     
+		// Klasse für einzelne Partikel
         class Particle {
             constructor() {
                 this.x = Math.random() * canvas.width;
@@ -38,7 +40,8 @@
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 this.shape = Math.random() > 0.5 ? 'circle' : 'star';
             }
-    
+			
+			// Position aktualisieren
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
@@ -46,6 +49,7 @@
                 if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
             }
     
+			// Partikel zeichnen
             draw() {
                 ctx.fillStyle = this.color;
                 ctx.beginPath();
@@ -68,7 +72,8 @@
                 ctx.fill();
             }
         }
-    
+		
+		// Partikel erstellen
         function initParticles() {
             particles.length = 0;
             for (let i = 0; i < 50; i++) {
@@ -77,6 +82,7 @@
         }
         initParticles();
     
+		// Animation starten
         function animate() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -88,6 +94,7 @@
         }
         animate();
 
+		// Fenstergröße anpassen
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
